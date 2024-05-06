@@ -21,6 +21,8 @@ namespace RepodbDemo
                 .UseSqlServer();
                 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddSingleton(new WarehouseRepository(connectionString!));
+            builder.Services.AddSingleton<IWarehouseObjectRepo>(new WarehouseObjectRepo(connectionString!));
+            builder.Services.AddSingleton<IWarehouseInlineRepo>(new WarehouseInlineRepo(connectionString!));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
